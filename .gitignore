@@ -1,0 +1,13 @@
+# .idea file
+.idea
+out/
+
+# virtual env
+.venv
+*.env
+
+# pycache
+*__pycache__
+
+# .gitkeep
+*.gitkeep
