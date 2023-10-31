@@ -12,5 +12,5 @@ class ProductionConfig(Config):
 # Load all possible configurations
 config_dict = {
     'Production': ProductionConfig,
-    'Debug': DevelopmentConfig
+    'Development': DevelopmentConfig
 }
