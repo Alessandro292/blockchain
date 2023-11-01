@@ -1,6 +1,10 @@
 import datetime
 import json
 import hashlib
+import logging
+
+blockchain_logger = logging.getLogger('blockchainLogger')
+
 
 class Blockchain:
     """
@@ -33,6 +37,7 @@ class Blockchain:
             'proof': proof,
             'previous_hash': previous_hash,
         }
+        blockchain_logger.info(f'New block created. Block index equal to: {len(self.__chain) + 1}')
         self.__chain.append(block)
         return block
 
@@ -40,7 +45,6 @@ class Blockchain:
         """
         Info: return the entire blockchain
         """
-
         return self.__chain
 
     def get_previous_block(self):
@@ -61,6 +65,7 @@ class Blockchain:
         """
         new_proof = 1
         check_proof = False
+        blockchain_logger.info(f'Try to find new proof of work')
         while check_proof is False:
             hash_operation = hashlib \
                 .sha256(str(new_proof ** 2 - previous_proof ** 2).encode()) \
@@ -69,6 +74,7 @@ class Blockchain:
                 check_proof = True
             else:
                 new_proof += 1
+        blockchain_logger.info(f'Found new proof of work equal to: {new_proof}')
         return new_proof
 
     def hash(self, block):
@@ -82,6 +88,7 @@ class Blockchain:
             str: block hash
         """
         encoded_block = json.dumps(block, sort_keys=True).encode()
+        blockchain_logger.info(f"Hash of the block with index {block['index']} calculate")
         return hashlib.sha256(encoded_block).hexdigest()
 
     def is_chain_valid(self, chain):
@@ -110,4 +117,5 @@ class Blockchain:
                 return False
             previous_block = chain[block_index]
             block_index += 1
+        blockchain_logger.info(f'Chain is valid')
         return True

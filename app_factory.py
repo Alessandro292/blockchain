@@ -1,4 +1,5 @@
 import os
+import logging
 from logging.config import fileConfig
 
 from flask import Flask
@@ -11,6 +12,7 @@ from app.routers.hello_api import hello_bp
 from app.routers.swagger_api import swagger_bp
 
 fileConfig('logging/logging.conf')
+logger = logging.getLogger('')
 
 def create_app():
 
