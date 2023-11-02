@@ -107,6 +107,8 @@ class Blockchain:
         while block_index < len(chain):
             block = chain[block_index]
             if block['previous_hash'] != self.hash(previous_block):
+                blockchain_logger.warning(f"Previous hash of block {block_index} is not equal"
+                                          f"to the hash of the previous block {block_index-1}")
                 return False
             previous_proof = previous_block['proof']
             proof = block['proof']
@@ -114,6 +116,7 @@ class Blockchain:
                 .sha256(str(proof ** 2 - previous_proof ** 2).encode()) \
                 .hexdigest()
             if hash_operation[:4] != '0000':
+                blockchain_logger.warning("Hash is greater than four leading zeros")
                 return False
             previous_block = chain[block_index]
             block_index += 1
