@@ -37,7 +37,8 @@
           }
         }
       }
-    },"/hello/{name}": {
+    },
+    "/hello/{name}": {
       "get": {
         "summary": "Returns a personalized greeting message. Replace {name} with a string",
         "produces": ["text/html"],
@@ -50,6 +51,34 @@
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mine-block": {
+      "get": {
+        "summary": "Mines a new block.",
+        "produces": ["text/html"],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/get-chain": {
+      "get": {
+        "summary": "Gets the entire blockchain.",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Successful response.",
