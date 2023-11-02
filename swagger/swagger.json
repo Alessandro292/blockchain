@@ -40,7 +40,7 @@
     },
     "/hello/{name}": {
       "get": {
-        "summary": "Returns a personalized greeting message. Replace {name} with a string",
+        "summary": "Returns a personalized greeting message.",
         "produces": ["text/html"],
         "parameters": [
           {
@@ -72,6 +72,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "500": {
+            "description": "Error during the mining of the new block",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -79,11 +85,38 @@
     "/get-chain": {
       "get": {
         "tags": ["blockchain"],
-        "summary": "Gets the entire blockchain.",
+        "summary": "Get the entire blockchain.",
         "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Successful response.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Blockchain is not reachable.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/is-valid": {
+      "get": {
+        "tags": ["blockchain"],
+        "summary": "Checks if the Blockchain is valid.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "The Blockchain is valid.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Error during validation.",
             "schema": {
               "type": "string"
             }
