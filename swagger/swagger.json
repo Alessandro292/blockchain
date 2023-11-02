@@ -1,41 +1,64 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Sample API",
-      "description": "A sample API that demonstrates how to use Flask-SwaggerUI.",
-      "version": "1.0"
+  "swagger": "2.0",
+  "info": {
+    "title": "Blockchain API",
+    "description": "A sample API that demonstrates how to use Flask-SwaggerUI.",
+    "version": "1.0"
+  },
+  "basePath": "/api",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["text/html"],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Returns a simple 'Hello, World!' message.",
+        "produces": ["text/html"],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
     },
-    "basePath": "/api",
-    "schemes": [
-      "http"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "paths": {
-      "/hello": {
-        "get": {
-          "summary": "Returns a simple greeting message.",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response.",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                }
-              }
+    "/hello/": {
+      "get": {
+        "summary": "Returns a greeting message.",
+        "produces": ["text/html"],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },"/hello/{name}": {
+      "get": {
+        "summary": "Returns a personalized greeting message. Replace {name} with a string",
+        "produces": ["text/html"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name for personalized greeting",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "string"
             }
           }
         }
       }
     }
   }
+}
