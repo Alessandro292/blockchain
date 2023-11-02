@@ -1,6 +1,7 @@
 import json
+import logging
 
-from flask import Blueprint, jsonify, logging
+from flask import Blueprint, jsonify
 
 route_logger = logging.getLogger('route_logger')
 
