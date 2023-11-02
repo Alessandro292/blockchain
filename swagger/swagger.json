@@ -63,6 +63,7 @@
     },
     "/mine-block": {
       "get": {
+        "tags": ["blockchain"],
         "summary": "Mines a new block.",
         "produces": ["text/html"],
         "responses": {
@@ -77,6 +78,7 @@
     },
     "/get-chain": {
       "get": {
+        "tags": ["blockchain"],
         "summary": "Gets the entire blockchain.",
         "produces": ["application/json"],
         "responses": {
