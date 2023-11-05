@@ -1,4 +1,4 @@
-# Titolo del Progetto
+# Blockchain
 
 Breve descrizione del progetto.
 
@@ -22,8 +22,8 @@ Descrivi come contribuire al progetto.
 
 Indica la licenza del progetto.
 
-### Esempi di Codice
+### Coverage
 
 ```python
 # Esempio di codice
-print("Hello, World!")
+coverage run -m pytest tests/

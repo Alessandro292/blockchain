@@ -1,5 +1,6 @@
 import pytest
 
+from app.instances.blockchain import Blockchain
 from app_factory import create_app
 
 @pytest.fixture
@@ -10,5 +11,7 @@ def app():
 def client(app):
     return app.test_client()
 
-
+@pytest.fixture
+def blockchain():
+    return Blockchain()
 
