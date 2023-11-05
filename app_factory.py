@@ -3,6 +3,7 @@ from os import path
 
 from flask import Flask
 
+from app.auth import login_bp
 from app.config.config import config_dict
 from app.config.constants import API_PREFIX, SWAGGER_URL
 from app.routers.blockchain_api import blockchain_bp
@@ -17,6 +18,8 @@ def create_app(config_name: str):
 
     selected_config = config_dict[config_name]
     app.config.from_object(selected_config)
+
+    app.register_blueprint(login_bp)
 
     app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
     app.register_blueprint(swagger_bp)
