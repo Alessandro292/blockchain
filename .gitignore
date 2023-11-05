@@ -9,6 +9,9 @@ out/
 # pycache
 *__pycache__
 
+# pytest_cache
+*.pytest_cache
+
 # .gitkeep
 *.gitkeep
 
