@@ -1,7 +1,7 @@
 import pytest
 
 from app.instances.blockchain import Blockchain
-from app_factory import create_app
+from app.app_factory import create_app
 
 @pytest.fixture
 def app():

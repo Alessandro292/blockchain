@@ -1,6 +1,6 @@
 import json
 import logging
-
+import os
 from flask import Blueprint, jsonify
 from flask_swagger_ui import get_swaggerui_blueprint
 
@@ -14,10 +14,10 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     config={'app_name': 'Blockchain API'}
 )
 
-swagger_bp = Blueprint('swagger_bp', __name__, template_folder='../../swagger')
+swagger_bp = Blueprint('swagger_bp', __name__)
 
 @swagger_bp.route('/swagger.json')
 def swagger():
-    route_logger.info('Request to /api/swagger.json endpoint')
-    with open('swagger/swagger.json', 'r') as f:
+    route_logger.info('Request to /swagger.json endpoint')
+    with open('../swagger/swagger.json', 'r') as f:
         return jsonify(json.load(f))

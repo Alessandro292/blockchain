@@ -7,6 +7,8 @@ RUN pip install --no-cache-dir -r /code/requirements.txt
 
 COPY . /code
 
-EXPOSE 6969
+EXPOSE 5000
 
-CMD ["python", "main.py"]
+WORKDIR /code/runners
+
+CMD ["python", "run_0.py"]
