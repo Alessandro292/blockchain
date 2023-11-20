@@ -23,6 +23,7 @@ def mine_block():
         previous_proof = previous_block['proof']
         proof = blockchain.proof_of_work(previous_proof)
         previous_hash = blockchain.hash(previous_block)
+        # Rewarding the miner
         blockchain.add_transactions(sender=node_address, receiver='Impa', amount=10)
         block = blockchain.create_block(proof=proof, previous_hash=previous_hash)
 

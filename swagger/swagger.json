@@ -13,7 +13,9 @@
     "/": {
       "get": {
         "summary": "Returns a simple 'Hello, World!' message.",
-        "produces": ["text/html"],
+        "produces": [
+          "text/html"
+        ],
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -27,7 +29,9 @@
     "/hello/": {
       "get": {
         "summary": "Returns a greeting message.",
-        "produces": ["text/html"],
+        "produces": [
+          "text/html"
+        ],
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -41,7 +45,9 @@
     "/hello/{name}": {
       "get": {
         "summary": "Returns a personalized greeting message.",
-        "produces": ["text/html"],
+        "produces": [
+          "text/html"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -63,9 +69,13 @@
     },
     "/mine-block": {
       "get": {
-        "tags": ["blockchain"],
+        "tags": [
+          "blockchain"
+        ],
         "summary": "Mines a new block.",
-        "produces": ["text/html"],
+        "produces": [
+          "text/html"
+        ],
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -84,9 +94,13 @@
     },
     "/get-chain": {
       "get": {
-        "tags": ["blockchain"],
+        "tags": [
+          "blockchain"
+        ],
         "summary": "Get the entire blockchain.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful response.",
@@ -105,9 +119,13 @@
     },
     "/is-valid": {
       "get": {
-        "tags": ["blockchain"],
+        "tags": [
+          "blockchain"
+        ],
         "summary": "Checks if the Blockchain is valid.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "The Blockchain is valid.",
@@ -119,6 +137,223 @@
             "description": "Error during validation.",
             "schema": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/add-transaction": {
+      "post": {
+        "tags": [
+          "blockchain"
+        ],
+        "summary": "Add a new transaction to the blockchain.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "transaction",
+            "in": "body",
+            "description": "Transaction data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sender": {
+                  "type": "string",
+                  "description": "Sender's address"
+                },
+                "receiver": {
+                  "type": "string",
+                  "description": "Receiver's address"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Transaction amount"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Transaction added successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Missing key value.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connect-node": {
+      "post": {
+        "tags": [
+          "blockchain"
+        ],
+        "summary": "Connects a node to the blockchain.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodes",
+            "in": "body",
+            "description": "List of nodes to connect",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "Node address"
+                  }
+                }
+              }
+            },
+            "example": {
+              "nodes": [
+                "http://127.0.0.1:5001",
+                "http://127.0.0.1:5002",
+                "http://127.0.0.1:5003"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Nodes connected successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "total_nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - No nodes provided.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error - Error connecting nodes.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/replace-chain": {
+      "get": {
+        "tags": [
+          "blockchain"
+        ],
+        "summary": "Replace the blockchain chain.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Chain replaced successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "new_chain": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "index": {
+                        "type": "integer"
+                      },
+                      "previous_hash": {
+                        "type": "string"
+                      },
+                      "proof": {
+                        "type": "integer"
+                      },
+                      "timestamp": {
+                        "type": "integer"
+                      },
+                      "transactions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "sender": {
+                              "type": "string"
+                            },
+                            "receiver": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error - Error replacing the chain.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
