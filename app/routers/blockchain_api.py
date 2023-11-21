@@ -113,7 +113,7 @@ def connect_node():
             blockchain.add_nodes(address=node)
 
         response = {
-            'message': 'All nodes are connected. Impaoin Blockchain is composed of the following nodes:',
+            'message': 'All nodes are connected. Impacoin Blockchain is composed of the following nodes:',
             'total_nodes': list(blockchain.nodes)
         }
         return jsonify(response), 201
